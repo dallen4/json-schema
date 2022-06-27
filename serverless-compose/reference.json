@@ -1,0 +1,47 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "title": "Serverless Compose Schema",
+    "description": "Schema for serverless compose config files",
+    "fileMatch": ["serverless-compose.yml"],
+    "type": "object",
+    "properties": {
+        "services": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "object",
+                "properties": {
+                    "path": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "Path to the directory containing serverless config file"
+                    },
+                    "config": {
+                        "type": "string",
+                        "description": "Name of the file if the file is not called serverless.yml"
+                    },
+                    "params": {
+                        "type": "object",
+                        "additionalProperties": true
+                    },
+                    "dependsOn": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "minItems": 1
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "path"
+                ]
+            }
+        }
+    }
+}
